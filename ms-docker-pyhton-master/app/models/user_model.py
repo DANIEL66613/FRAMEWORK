@@ -41,7 +41,7 @@ class User:
             if user["id"] == user_id:
                 # atualiza só os campos que forem fornecidos
                 user.update({k: v for k, v in data.items() if k in user})
-                return user  # Retorna o usuário atualizado
+                return user  
         return {"error": "Usuario nao encontrado"}
 
     @classmethod
