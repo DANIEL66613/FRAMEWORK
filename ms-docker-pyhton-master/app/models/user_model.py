@@ -1,5 +1,5 @@
 class User:
-    # Simulação de um banco de dados
+
     users = [
         {"id": 1, "name": "Alice", "email": "alice@example.com"},
         {"id": 2, "name": "Bob", "email": "bob@example.com"}
@@ -20,12 +20,10 @@ class User:
     
     @classmethod
     def store(cls, data):
-        """Adiciona um novo usuário à lista."""
-        # Garante que o email seja único
+        
         if any(user["email"] == data["email"] for user in cls.users):
-            return {"error": "Email already exists"}
+            return {"error": "Email já existe"}
 
-        # Garante que o ID seja único
         new_id = max(user["id"] for user in cls.users) + 1 if cls.users else 1
 
         new_user = {
@@ -35,23 +33,21 @@ class User:
         }
 
         cls.users.append(new_user)
-        return new_user  # Retorna o usuário recém-criado
+        return new_user 
 
     @classmethod
     def update(cls, user_id, data):
-        """Atualiza um usuário existente."""
         for user in cls.users:
             if user["id"] == user_id:
-                # Atualiza apenas os campos fornecidos
+                # atualiza só os campos que forem fornecidos
                 user.update({k: v for k, v in data.items() if k in user})
                 return user  # Retorna o usuário atualizado
-        return {"error": "User not found"}
+        return {"error": "Usuario nao encontrado"}
 
     @classmethod
     def delete(cls, user_id):
-        """Remove um usuário pelo ID."""
         for i, user in enumerate(cls.users):
             if user["id"] == user_id:
                 del cls.users[i]
-                return {"message": "User deleted successfully"}
-        return {"error": "User not found"}
+                return {"message": "Usuario deletado! "}
+        return {"error": "Usuarui nao encontrado"}
